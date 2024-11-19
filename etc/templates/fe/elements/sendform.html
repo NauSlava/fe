@@ -1,0 +1,55 @@
+$('#sendcalc').click(function(){
+	var covertype1, covertypeval1, covertype2,covertypeval2, materialupcolor1, materialupcolor1val, layertop, layerbottom, grunt, skipidar, rashodniki, act;
+	var square, res, res_crumb, res_glue, res_grunt_glue, res_grunt_solvent;
+	square=$('input[name="square"]').val();
+	covertype1=$('select[name="covertype1"] option:selected').html();
+	covertypeval1=$('select[name="covertype1"] option:selected').val();
+	materialupcolor1=$('select[name="materialupcolor1"] option:selected').html();
+	materialupcolor1val=$('select[name="materialupcolor1"] option:selected').val();
+	layertop=$('input[name="layertop"]').val();
+	layerbottom=$('input[name="layerbottom"]').val();
+	if($('input[name="grunt"]').prop('checked')==true){grunt='да';gruntval=1;} else {grunt='нет';gruntval=0;}
+	if($('input[name="skipidar"]').prop('checked')==true){skipidar='да';} else {skipidar='нет';}
+	if($('input[name="rashodniki"]').prop('checked')==true){rashodniki='да';} else {rashodniki='нет';}
+
+	act='getcalc';
+//	alert(covertypeval+' '+ square +' '+ materialupcolor1val);
+	if(square>0) {
+		if(materialupcolor1val==1) {
+			res_crumb=square*7;
+			res_glue=res_crumb*0.2;
+			if(gruntval==1) {
+				res_grunt_glue=square*0.2;
+				res_grunt_solvent=square*0.2;
+			} else {res_grunt_glue='нет';res_grunt_solvent='нет';}
+		}
+		if(materialupcolor1val==2) {
+			res_crumb=square*7;
+			res_glue=res_crumb*0.18;
+			if(gruntval==1) {
+				res_grunt_glue=square*0.2;
+				res_grunt_solvent=square*0.2;
+			} else {res_grunt_glue='нет';res_grunt_solvent='нет';}
+		}
+		if(materialupcolor1val==3) {
+			res_crumb=square*8;
+			res_glue=res_crumb*0.18;
+			if(gruntval==1) {
+				res_grunt_glue=square*0.2;
+				res_grunt_solvent=square*0.2;
+			} else {res_grunt_glue='нет';res_grunt_solvent='нет';}
+		}
+
+	} else {
+		res_crumb='Ошибка';
+		res_glue='Ошибка';
+		res_grunt_glue='Ошибка';
+		res_grunt_solvent='Ошибка';
+	}
+
+	$('#resultcalc').html('Площадь покрытия: '+square+' м<sup>2</sup><br>Вид покрытия: '+covertype+'<br>Материал верхнего слоя:'+materialupcolor1+
+		'<br>Толщина верхнего слоя (мм):'+layertop+'<br>'+'Толщина нижнего слоя (мм): '+layerbottom+
+		'<br>Грунтовка: '+grunt+'<br>Скипидар / УС: '+skipidar+'<br>Расходники (тазы перчатки, тележки):'+rashodniki+
+		'<br><br><h3>Вам понадобится:</h3>Крошка: '+res_crumb+' кг<br>Клей: '+res_glue+' кг<br>Грунт(клей+растворитель): '+
+		res_grunt_glue+' кг + '+res_grunt_solvent+' л');
+});

@@ -1,0 +1,180 @@
+<?php /** @var TemplateItemWrapper $tiw */ ?>
+<footer class="mt-5">
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-md-3 noPhone">
+                <?php if( !empty( $__footerOne )){ ?>
+                <ul class="list-unstyled">
+                    <?php foreach( $__footerOne as $item ){ ?>
+                    <li><a href="{$item.url}" title="{$item.title}">{$item.title}</a></li>
+                    <?php } ?>
+                </ul>
+                <?php } ?>
+            </div>
+            <div class="col-md-3 noPhone">
+                 <?php if( !empty( $__footerTwo )){ ?>
+				 <ul class="list-unstyled">
+					<?php foreach( $__footerTwo as $item ){ ?>
+						<li><a href="{$item.url}" title="{$item.title}">{$item.title}</a></li>
+					<?php } ?>
+				</ul>
+                <?php } ?>
+            </div>
+            <div class="col-md-3 noPhone">
+                <?php if( !empty( $__footerFour )){ ?>
+			<ul class="list-unstyled">
+				<? foreach( $__footerFour as $item ){ ?>
+					<li><a href="{$item.url}" title="{$item.title}">{$item.title}</a></li>
+				<? } ?>
+			</ul>
+                <? } ?>
+            </div>
+            <div class="col-md-3 col-12">                            
+		<a class="phone d-inline text-lg-right" href="tel://+7-495-724-0924">+7 (495) <strong>724-09-24</strong></a>
+                <ul class="list-inline socials text-center text-sm-right">
+                    <li class="list-inline-item circle-number-s"><a href=""><i class="fa fa-facebook">&nbsp;</i></a></li>
+                    <li class="list-inline-item circle-number-s"><a href=""><i class="fa fa-vk">&nbsp;</i></a></li>
+                    <li class="list-inline-item circle-number-s"><a href=""><i class="fa fa-twitter">&nbsp;</i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-4 col-12 text-center text-sm-left" style="font-size: 14px;">Copyright © 2014-<?=date('Y');?> «Recro» Все права защищены</div>
+            <div class="col-md-6 noPhone" style="font-size: 14px;">
+                <span class="address-footer">Адрес: Московская область, г. Подольск, ул Шамотная <a class="underline" href="/contacts/">Схема проезда</a></span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div class="fixformContact">
+    <div class="m-auto w600">
+        <div class="fixformContact--title vspl">Написать письмо<div class="fixformContact--close"></div></div>
+        <div class="fixformContact--body vspl">
+            <section class="section section-contact mt-3">
+                <div class="section--content">
+                    <form class="form form-contact" action="/contacts/" method="post">
+			<input type='hidden' name="product_id" value='<? echo $product->productId; ?>'>
+                        <?= SecureTokenHelper::FormHidden();?>
+                        <p>Заполните необходимые поля. Наш сотрудник свяжется с вами в ближайшее время.</p>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <input class="form-control" type="text" name="message[contact]" value="" placeholder="Имя *"/>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" name="message[email]"  value="" placeholder="Email*" />
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text"  name="message[phone]" value=""  placeholder="Телефон для связи" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea class="form-control" name="message[message]"  placeholder="Ваше сообщение"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <div class="form-check">
+                                <input class="form-check-input" name="message[isCopy]" type="checkbox" id="gridCheck">
+                                <label class="form-check-label" for="gridCheck">
+                                    Отправить копию на ваш e-mail
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <button class="button button-pink" name="save" value="true" onclick="yaCounter29298175.reachGoal('request_success');return true;">Отправить сообщение</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script rel="preload" as="script" src="/shared/js/fe/jquery-3.3.1.min.js"></script>
+<script rel="preload" as="script" src="/shared/js/fe/bootstrap.min.js"></script>
+
+ <!--noscript id="deferred-styles">
+    <!--link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet preload"->	
+ 	<link href="/shared/css/fe/bootstrap.min.css" rel="stylesheet preload" as="style">
+    <!--?= CssHelper::Flush(); echo "\n"; ?->
+	<link rel="stylesheet preload" as ="style" type="text/css" href="https://recro.ru/shared/css/fe/custom.css">
+	<!--link rel="stylesheet preload" as ="style" type="text/css" href="https://recro.ru/shared/css/fe/jquery.fancybox.css?2976" /->
+    </noscript-->
+<script>
+      var loadDeferredStyles = function() {
+        var addStylesNode = document.getElementById("deferred-styles");
+        var replacement = document.createElement("div");
+        replacement.innerHTML = addStylesNode.textContent;
+        document.body.appendChild(replacement)
+        addStylesNode.parentElement.removeChild(addStylesNode);
+      };
+      var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+          window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+      if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+      else window.addEventListener('load', loadDeferredStyles);
+</script>
+<!--?= JsHelper::Flush(); echo "\n"; ?-->
+<!--script rel="preload" as="script" src="/shared/js/fe/jquery.fancybox.pack.js"></script-->
+<!--script rel="preload" as="script" src="/shared/js/fe/jquery.qtip.min.js"></script-->
+<script src="/shared/js/fe/custom.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-71XPKMKH5Z"></script>
+<!--script async src="https://www.googletagmanager.com/gtag/js?id=UA-126417998-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126417998-1');
+</script-->
+<!-- Yandex.Metrika counter -->
+<script>
+var fired = false;
+
+window.addEventListener('scroll', () => {
+    if (fired === false) {
+        fired = true;
+        
+        setTimeout(() => {
+
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+// UA-126417998-1
+	gtag('config', 'G-71XPKMKH5Z');
+
+		(function (d, w, c) {
+			(w[c] = w[c] || []).push(function() {
+				try {
+					w.yaCounter50474242 = new Ya.Metrika2({
+					id:50474242,
+					clickmap:true,
+					trackLinks:true,
+					accurateTrackBounce:true,
+					webvisor:true
+					});
+				} 
+				catch(e) { }
+			});
+
+			var n = d.getElementsByTagName("script")[0],
+			s = d.createElement("script"),
+			f = function () { n.parentNode.insertBefore(s, n); };
+			s.type = "text/javascript";
+			s.async = true;
+			s.src = "https://mc.yandex.ru/metrika/tag.js";
+			if (w.opera == "[object Opera]") {
+				d.addEventListener("DOMContentLoaded", f, false);
+			} else { f(); }
+	    }) (document, window, "yandex_metrika_callbacks2");
+
+        }, 1000)
+    }
+});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/50474242" style="position:absolute; left:-9999px;" alt="YandexCounter" /></div></noscript>
+</body>
+</html>

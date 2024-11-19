@@ -1,0 +1,236 @@
+<?
+    /** @var TemplateItemWrapper $tiw */
+    /** @var Navigation[] $__menu */
+
+	if (!isset($__activeElement)) $__activeElement = NULL;
+
+    $__metaDetail = MetaDetailUtility::GetForContext( false, Page::$RequestData[0]);
+
+    /**
+     * Manual set meta or reset of meta
+     */
+    $__sitePageTitle    = 'Recro';
+    $__pageTitle        = !empty( $__pageTitle ) ? $__pageTitle : '';
+    $__metaDescription  = !empty( $__metaDescription ) ? $__metaDescription : '';
+    $__metaKeywords     = !empty( $__metaKeywords ) ? $__metaKeywords : '';
+    $__imageAlt         = !empty( $__imageAlt ) ? $__imageAlt : '';
+
+	/*
+	 * Meta tags from MetaDetail object or Page object
+	*/
+	if ( !empty( $__metaDetail ) ) {
+        if ( !empty( $__metaDetail->pageTitle ) )       $__pageTitle       = $__metaDetail->pageTitle;
+        if ( !empty( $__metaDetail->metaDescription ) ) $__metaDescription = $__metaDetail->metaDescription;
+        if ( !empty( $__metaDetail->metaKeywords) )     $__metaKeywords    = $__metaDetail->metaKeywords;
+        if ( !empty( $__metaDetail->alt) )         		$__imageAlt        = $__metaDetail->alt;
+    } else if( !empty( $__page ) ) {
+        $__pageTitle = !empty( $__page->pageTitle ) ? $__page->pageTitle : ( $__page->title . ' | ' . $__sitePageTitle );
+
+        if ( !empty( $__page->metaDescription ) ) $__metaDescription = $__page->metaDescription;
+        if ( !empty( $__page->metaKeywords) )     $__metaKeywords    = $__page->metaKeywords;
+    }
+
+    /**
+     * Default page title
+     */
+    $__pageTitle = !empty( $__pageTitle ) ? $__pageTitle : $__sitePageTitle;
+
+    $cssFiles = array(
+        AssetHelper::AnyBrowser => array(
+
+             "css://fe/custom.css"
+            , "css://fe/jquery.fancybox.css"
+        )
+    );
+
+    $jsFiles = array(
+        "js://fe/jquery-3.3.1.min.js"
+        , "js://fe/bootstrap.min.js"
+        , "js://fe/jquery.fancybox.pack.js"
+        , "js://fe/jquery.qtip.min.js"
+        , "js://fe/custom.js"
+    );
+
+    CssHelper::Init( false );
+    JsHelper::Init( true );
+
+    CssHelper::PushGroups( $cssFiles );
+    if( !empty( $cssFilesAdds ) ) {
+        CssHelper::PushGroups( $cssFilesAdds );
+    }
+
+    JsHelper::PushFiles( $jsFiles );
+    if( !empty( $jsFilesAdds ) ) {
+        JsHelper::PushFiles( $jsFilesAdds );
+    }
+?>
+<!DOCTYPE html>
+<!--[if IE 9]>
+<html lang="ru" class="ie9"> <![endif]-->
+<!--[if IE 8]>
+<html lang="ru" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="ru">
+<!--<![endif]-->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=<?= LocaleLoader::$HtmlEncoding ?>" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?=$__pageTitle?></title>
+    <meta name="keywords" content="{form:$__metaKeywords}" />
+	<meta name="description" content="{form:$__metaDescription}" />
+    <meta name='yandex-verification' content='2f7afabd7c45ff86' />
+    <? if (!empty( $__params[SiteParamHelper::GoogleMeta] ) ) { ?>
+    <meta name='google-site-verification' content='<?= $__params[SiteParamHelper::GoogleMeta]->value ?>' />
+    <? } ?>
+<!--	<link rel="icon" href="{web:/favicon.ico}" type="image/x-icon" />
+-->
+    <link rel="shortcut icon" href="{web:/favicon.ico}" type="image/x-icon" />
+    <script type="text/javascript">
+        document.documentElement.id = "js";
+        var root = '{web:/}';
+        var controlsRoot = '{web:controls://}';
+    </script>
+    <!--link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet"-->
+    <link rel="canonical" href="https://recro.ru<?=Page::$RequestData[0];?>"/>
+</head>
+<body>
+<div class="header-wrapper">
+    <div class="container">
+        <div class="row d-lg-none mobile-top">
+            <!--div class="col-sm-3 col-md-3 col-3 text-center"-->
+                <a href="/" class='logo'>
+                    <img src="/shared/images/fe/logo.png" style="max-height: 100px;" class="img-fluid">
+                </a>
+            <!--/div-->
+            <div class="col-sm-4 col-md-3 col-7 align-self-center">
+                <a class="phone text-center" href="#">+7 (495) 968-02-90  I  8 (800) 200-99-24</a>
+            </div>
+            <!--div class="col-md-4 col-sm-4 col-4 text-center align-self-center noPhone">
+                <a href="tel://+74957240924" class="btn btn-primary btn-sm messageTrigger" onclick="yaCounter29298175.reachGoal('request_top');return true;"  id="topFeedback2">
+                    Оставить заявку
+                </a>
+            </div>
+            <div class="col-sm-1 col-md-1 col-1 text-center align-self-center"-->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#globalNavbarMobile"
+                        aria-controls="globalNavbar" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i>
+                </button>
+            <!--/div-->
+        </div>
+    </div>
+    <div class="collapse navbar-collapse" id="globalNavbarMobile">
+        <?php if( !empty( $__menu )){ ?>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="list-unstyled list-inline top-menu2 lg-text-right md-text-right mt-1 ">
+                        <?php foreach( $__menu as $item ){ ?>
+                            <?php $isActive = ($__activeElement == $item->getLink())?true:false; ?>
+                            <li class="d-inline">
+                            <a class="underline" href="{$item.url}" alt="{$item.title}">{$item.title}</a>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <?php } ?>
+        <ul class="navbar-nav" id="globalNavbarMobileInner">
+            <?php if( !empty( $__catalogMenu )){ ?>
+                <?php $counter = 0; ?>
+                <?php foreach( $__catalogMenu as $item ){ ?>
+                    <?php if( !empty( $item->nodes )){?>
+                        <li class="nav-item catalogMenuLink dropdown ">
+                            <a href="{$item.getLink()}" class="dropdown-toggle mobileCenterLi" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {$item.title}
+                            </a>
+                            <div class="dropdown-menu">
+                                <?php foreach( $item->nodes as $child ){ ?>
+                                    <a  href="{$child.getLink()}" class="dropdown-item mobileCenterLi">{$child.title}</a>
+                                <?php } ?>
+                            </div>
+                        </li>
+                    <?php }else{ ?>
+                        <li class="nav-item catalogMenuLink"><a href="{$item.url}" class="mobileCenterLi">{$item.title}</a></li>
+                    <?php } ?>
+                    <?php $counter++; } ?>
+            <?php } ?>
+        </ul>
+    </div>
+    <div class="container" id="topHeader">
+        <div class="row">
+                <a href="/" class="navbar-brand">
+                    <img src="/shared/images/fe/logo.png" class="img-fluid"/>
+                </a>
+
+            <div class=" d-none d-lg-block">
+                <div class="row pt-3">
+                    <div class="col-md-12">
+                        <?php if( !empty( $__menu )){ ?>
+                            <ul class="list-unstyled list-inline top-menu lg-text-right md-text-right mt-1 ">
+                                <?php foreach( $__menu as $item ){ ?>
+                                    <?php $isActive = ($__activeElement == $item->getLink())?true:false; ?>
+                                    <li class="d-inline-flex">
+                                        <a class="underline" href="{$item.url}" alt="{$item.title}">{$item.title}</a>
+                                    </li>
+                                <?php } ?>
+                            </ul>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="row mt-4 pt-3">
+                     <div class="col-md-6 d-none d-lg-block ">
+                         <a class="phone d-inline text-lg-right" href="tel://+7-495-724-0924"><strong>+7 (495) 968-02-90  I  8 (800) 200-99-24</strong></a>
+                    </div>
+                    <div class="col-md-6 d-none d-lg-block">
+                        <p class="address">Адрес: Московская область, г. Подольск,<br/> ул Шамотная <a class="underline" href="/contacts/">Схема проезда</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-12 col-sm-12 text-center d-none d-lg-block pt-5">
+                <div class="text-right d-none d-lg-block">
+                    <button class="btn btn-primary btn-sm mt-2 mb-2 messageTrigger" onclick="yaCounter29298175.reachGoal('request_top');return true;"  id="topFeedback">Оставить заявку</button>
+                </div>
+                <p class="price-list"><a href="/shared/files/201807/23_472.pdf">Скачать прайс лист</a> 862,50 Кб</p>
+            </div>
+        </div>
+    </div>
+</div>
+<?php if( empty( $isMainPage )){?>
+<hr class="d-lg-none"/>
+<?php } ?>
+<nav class="navbar navbar-expand-lg navbar-light d-none d-lg-block">
+    <?php if( !empty( $__catalogMenu )){ ?>
+    <?php foreach( $__catalogMenu as $item ){ ?>
+    <?php if( !empty( $item->nodes )){?>
+    <div id="gd{$item.navigationId}" class="backgroundMenu" style="height: <?= count( $item->nodes ) * 40 ?>px">&nbsp;</div>
+    <?php } ?>
+    <?php } ?>
+    <?php } ?>
+    <div class="container">
+
+        <div class="collapse navbar-collapse" id="globalNavbar">
+
+            <ul class="navbar-nav  d-lg-table">
+				<?php if( !empty( $__catalogMenu )){ ?>
+					<?php $counter = 0; ?>
+					<?php foreach( $__catalogMenu as $item ){ ?>
+                    <?php if( !empty( $item->nodes )){?>
+                        <li class="nav-item d-lg-table-cell dropdown">
+                            <a href="{$item.getLink()}" class="dropdown-toggle">
+                                {$item.title}
+                            </a>
+                            <div class="dropdown-menu" id="d{$item.navigationId}">
+                                <?php foreach( $item->nodes as $child ){ ?>
+                                    <a  href="{$child.getLink()}" class="dropdown-item">{$child.title}</a>
+                                <?php } ?>
+                            </div>
+                        </li>
+                    <?php }else{ ?>
+                        <li class="nav-item d-lg-table-cell <?= empty($counter)?'text-lg-left':'';?> <?= (!empty($counter)&&($counter+1 == count($__catalogMenu)))?'text-lg-right':'';?>"><a class="nav-link" href="{$item.url}">{$item.title}</a></li>
+                    <?php } ?>
+                    <?php $counter++; } ?>
+				<?php } ?>
+            </ul>
+        </div>
+    </div>
+</nav>

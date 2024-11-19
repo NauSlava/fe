@@ -1,0 +1,367 @@
+<?
+
+	define('ROOT_DIR', $path);
+	define('PIENGINE',true);
+	define('ENGINE_DIR', '/home/b/born2fly/public_html/shared/myengine');
+	define('INC_DIR', '/home/b/born2fly/public_html/include');
+	require_once ENGINE_DIR.'/classes/mysql.php';
+
+	define ("DBHOST", "localhost"); 
+	define ("DBNAME", "born2fly_new");
+	define ("DBUSER", "born2fly_new"); 	
+	define ("DBPASS", "zNjGXInHcAyIIBKAi8V4");  
+	define ("COLLATE", "UTF8"); 
+
+	$db = new db;
+	$i=0;
+	$imgs='';
+	$options='';
+
+	$query_sbr='SELECT * FROM products WHERE statusId=1 AND categoryId=26';
+	$query_id1=$db->query ($query_sbr);
+	while ($row=$db->get_row($query_id1)) {
+		$i++;
+
+		$query1="SELECT * FROM vfsFiles WHERE fileId='".$row['smallImageId']."' ";
+		$query_id2=$db->query ($query1);
+		while ($row1=$db->get_row($query_id2)) {
+			$img='/shared/files/'.$row1['path'];
+		}
+		$arrprodsbr[$i][0]=$row['title'];
+		$arrprodsbr[$i][1]=$row['foreword'];
+		$arrprodsbr[$i][2]=$row['price'];
+		$arrprodsbr[$i][3]='<img src="'.$img.'" alt="" style="width: 30px;">';
+
+		$sbr.="<option value='".$row['productId']."' style='background-image: url(".$img.");' data-price='".$arrprodsbr[$i][2]."'>".$arrprodsbr[$i][1]."</option>";
+	}
+
+//print_r($arrprodsbr);
+
+	$query_color='SELECT * FROM products WHERE statusId=1 AND categoryId=42';
+	$query_id1=$db->query ($query_color);
+	while ($row=$db->get_row($query_id1)) {
+		$i++;
+
+		$query1="SELECT * FROM vfsFiles WHERE fileId='".$row['smallImageId']."' ";
+		$query_id2=$db->query ($query1);
+		while ($row1=$db->get_row($query_id2)) {
+			$img='/shared/files/'.$row1['path'];
+		}
+		$arrprod[$i][0]=$row['title'];
+		$arrprod[$i][1]=$row['foreword'];
+		$arrprod[$i][2]=$row['price'];
+		$arrprod[$i][3]='<img src="'.$img.'" alt="" style="width: 30px;">';
+
+		$options.="<option value='".$row['productId']."' style='background-image: url(".$img.");' data-price='".$arrprod[$i][2]."'>".$arrprod[$i][1]."</option>";
+	}
+
+	$optionsepdm='';
+	$query_epdm='SELECT * FROM products WHERE statusId=1 AND categoryId=28';
+	$query_id1=$db->query ($query_epdm);
+	while ($row=$db->get_row($query_id1)) {
+		$i++;
+
+		$query1="SELECT * FROM vfsFiles WHERE fileId='".$row['smallImageId']."' ";
+		$query_id2=$db->query ($query1);
+		while ($row1=$db->get_row($query_id2)) {
+			$img='/shared/files/'.$row1['path'];
+		}
+		$arrprodepdm[$i][0]=$row['title'];
+		$arrprodepdm[$i][1]=$row['foreword'];
+		$arrprodepdm[$i][2]=$row['price'];
+		$arrprodepdm[$i][3]='<img src="'.$img.'" alt="" style="width: 30px;">';
+
+		$optionsepdm.="<option value='".$row['productId']."' style='background-image: url(".$img.");' data-price='".$arrprodepdm[$i][2]."'>".$arrprodepdm[$i][1]."</option>";
+	}
+?>
+<style>
+.calc {width: 100%;}
+label {margin-bottom: 20px;margin-right: 20px;}
+input[type='number'] {min-width:30px; max-width:70px;text-align: center; margin-right: 10px;}
+</style>
+<div class='calc' style='margin-top:50px;'>
+<h1>Калькулятор резинового покрытия</h1>
+<form action='?' method='post' style='display: inline-block;'>
+	<input type='hidden' name='action' value='calc'>
+
+	<div id='sbrselect' class='hidden'><? echo $sbr;?></div>
+	<div id='colorsselect' class='hidden'><? echo $options;?></div>
+	<label style='margin-right:30px;'>Общая покрываемая площадь (м<sup>2</sup>):<br>
+		<input type='number' id='square' name='square' value='0' style='width:70px;'>
+	</label><br><br>
+	<h2>Первый (нижний) слой покрытия</h2>
+	<label style='margin-right:30px;'>Покрытие нижнего слоя:<br>
+		<select name='covertype1' title='Покрытие нижнего слоя' autocomplete='off'>
+			<option value='0'> Не выбрано </option>
+			<option value='1' title='обычная черная с пигментом'>Recro SBR</option>
+			<option value='2' title='окрашенная крошка'>Recro SBR Color</option>
+			<option value='3' title='епдм крошка'>Recro Kids EPDM</option>
+			<option value='4' title='tpv крошка'>Recro Kids TPV</option>
+		</select>
+	</label> <br>
+
+	<label>Толщина нижнего слоя (мм):<br>
+		<input type='number' id='bottomlayer' name='bottomlayer' value='20'>
+		<input type="range" name="layerbottom" id="layerbottom" min="5" max="40" step="5" value="20" list='layerbottomlist'> 	
+		<datalist id="layerbottomlist">
+			<option value="5" label="5 mm"><option value="10"><option value="15"><option value="20" label="20 mm"><option value="25"><option value="30"><option value="35"><option value="40" label="40 mm">
+		</datalist>
+	</label><br><br>
+	<div class='sbr'></div>
+	<div class='colors'></div>
+	<div id='resultfirst' class='resultfirst'></div>
+<br><br>
+	<!--h2>Второй (вехний) слой покрытия</h2>
+	<label style='margin-right:30px;'>Покрытие верхнего слоя:<br>
+		<select name='covertype2' title='Покрытие верхнего слоя'>
+			<option value='0'> Не выбрано </option>
+			<option value='1' title='обычная черная с пигментом'>Recro SBR</option>
+			<option value='2' title='окрашенная крошка'>Recro SBR Color</option>
+			<option value='3' title='епдм крошка'>Recro Kids EPDM</option>
+			<option value='4' title='tpv крошка'>Recro Kids TPV</option>
+		</select>
+	</label> <br>
+
+	<label style='margin-right:30px;'>Толщина верхнего слоя (мм):<br>
+		<input type='number' id='toplayer' name='toplayer' value='20'>
+		<input type="range" name="layertop" id="layertop" step="5" min="0" max="20" list="layertoplist"> 	
+		<datalist id="layertoplist">
+			<option value="5" label="5 mm"><option value="10"><option value="15"><option value="20" label="20 mm"><option value="25"><option value="30"><option value="35"><option value="40" label="40 mm">
+		</datalist>
+	</label><br>
+
+	<label>Материал верхнего слоя:<br>
+		<select name='materialupcolor1' title='Материал верхнего слоя'>
+			<option value='0'> Не выбрано </option>
+			<option value='1' title='черный' style='background:#000; color:#fff;'>черный</option>
+			<option value='2' title='желтый' style='background:#ffff00;'>желтый</option>
+			<option value='3' title='розовый' style='background:#ff00ff;'>розовый</option>
+			<option value='4' title='синий' style='background:#1155cc; color: #fff;'>синий</option>
+		</select>
+		<input type='number' id='square1' name='square1' value='0' style='width:70px;'> м<sup>2</sup>
+		<input type='button' id='addcolor1' name='addcolor1' value='Добавить цвет'>
+	</label><br-->
+
+	<label><input type="checkbox" name="grunt" value="0"> - Грунтовка</label><br>
+	<label><input type="checkbox" name="skipidar" value="0"> - Скипидар / УС</label><br>
+	<label><input type="checkbox" name="rashodniki" value="0"> - Расходники (тазы перчатки, тележки)</label><br>
+
+	<input type='button' value='Расчитать' id='sendcalc'>
+</form>
+	<div class='resultcalc' id='resultcalc'  style='display: inline-block; vertical-align: top;'></div>
+
+</div>
+
+<div id='colorblock' class='hidden'>
+		<label class='coloritem'>Материал слоя:<br>
+			<select name='materialupcolor_xx' title='Материал слоя'>
+				<option value='0'> Не выбрано </option>
+				<option value='1' title='черный' style='background:#000; color:#fff;'>черный</option>
+				<option value='2' title='желтый' style='background:#ffff00;'>желтый</option>
+				<option value='3' title='розовый' style='background:#ff00ff;'>розовый</option>
+				<option value='4' title='синий' style='background:#1155cc; color: #fff;'>синий</option>
+			</select>
+			<br>Площадь покрытия цветом, %: <br>
+			<input type='number' id='squarelayer_xx' name='squarelayer_xx' value='33'>
+			<input type='range' name='layersquare_xx' id='layersquare_xx' min='0' max='100' step='1' value='33'>
+
+			<input type='button' id='addcolor' name='addcolor' value='Добавить цвет'>
+		</label>
+</div>
+<script rel="preload" as="script" src="/shared/js/fe/jquery-3.3.1.min.js"></script>
+<script>
+	var j=0;
+	$('body').on('click', 'input[type="number"]', function(){
+		if($(this).attr('name')!='square'){
+			$(this).next().val($(this).val());
+			var massacolors=0;
+			var covertype1=$('select[name="covertype1"] option:selected').val();
+			var j=$('.colors').find('label.coloritem').length;
+			for(var i=1;i<=j;i++){
+				massacolors=parseInt(massacolors)+parseInt($('#squarelayer_'+i).val());
+			}
+			range1=$('#square').val()*massacolors/100;
+
+
+			layercalc(covertype1,range1);
+//			console.log($(this).val());
+		}
+	});
+	$('body').on('click', '#addcolor', function(){
+		$(this).remove();
+		var optionlist=$('#colorsselect').html();
+//		$('label.coloritem').each(function(){Number.isInteger(j+1); });
+		j=$('.coloritem').length;
+		var string="Материал слоя:<br><select name='materialupcolor_"+j+"' title='Материал слоя'>"+optionlist+"</select><br>Площадь покрытия цветом, %: <br><input type='number' id='squarelayer_"+j+"' name='squarelayer_"+j+"' value='33'><input type='range' name='layersquare_"+j+"' id='layersquare_"+j+"' min='0' max='100' step='1' value='33'><input type='button' id='addcolor' name='addcolor' value='Добавить цвет'>";
+//		var source=$('.colors').html();
+//<option value='0'> Не выбрано </option><option value='1' title='черный' style='background:#000; color:#fff;'>черный</option><option value='2' title='желтый' style='background:#ffff00;'>желтый</option><option value='3' title='розовый' style='background:#ff00ff;'>розовый</option><option value='4' title='синий' style='background:#1155cc; color: #fff;'>синий</option>
+		let parent = document.querySelector('.colors');
+		let label = document.createElement('label'); // создаем td-шку
+		label.className="coloritem";
+		label.innerHTML = string; 
+		parent.appendChild(label);
+
+		var covertype1=$('select[name="covertype1"] option:selected').val();
+		var range=$('input[name="layerbottom"]').val(); 
+
+		layercalc(covertype1,range)
+	});
+
+//document.getElementById("layertop").addEventListener("change", function() { $('#toplayer').val(this.value);});
+document.getElementById("layerbottom").addEventListener("change", function() { $('#bottomlayer').val(this.value);});
+
+$('#sendcalc').click(function(){
+	var covertype1, covertypeval1, covertype2,covertypeval2, materialupcolor1, materialupcolor1val, layertop, layerbottom, grunt, skipidar, rashodniki, act;
+	var square, res, res_crumb, res_glue, res_grunt_glue, res_grunt_solvent;
+	square=$('input[name="square"]').val();
+	covertype1=$('select[name="covertype1"] option:selected').html();
+	covertypeval1=$('select[name="covertype1"] option:selected').val();
+	materialupcolor1=$('select[name="materialupcolor1"] option:selected').html();
+	materialupcolor1val=$('select[name="materialupcolor1"] option:selected').val();
+	layertop=$('input[name="layertop"]').val();
+	layerbottom=$('input[name="layerbottom"]').val();
+	if($('input[name="grunt"]').prop('checked')==true){grunt='да';gruntval=1;} else {grunt='нет';gruntval=0;}
+	if($('input[name="skipidar"]').prop('checked')==true){skipidar='да';} else {skipidar='нет';}
+	if($('input[name="rashodniki"]').prop('checked')==true){rashodniki='да';} else {rashodniki='нет';}
+
+	act='getcalc';
+//	alert(covertypeval+' '+ square +' '+ materialupcolor1val);
+	if(square>0) {
+		if(materialupcolor1val==1) {
+			res_crumb=square*7;
+			res_glue=res_crumb*0.2;
+			if(gruntval==1) {
+				res_grunt_glue=square*0.2;
+				res_grunt_solvent=square*0.2;
+			} else {res_grunt_glue='нет';res_grunt_solvent='нет';}
+		}
+		if(materialupcolor1val==2) {
+			res_crumb=square*7;
+			res_glue=res_crumb*0.18;
+			if(gruntval==1) {
+				res_grunt_glue=square*0.2;
+				res_grunt_solvent=square*0.2;
+			} else {res_grunt_glue='нет';res_grunt_solvent='нет';}
+		}
+		if(materialupcolor1val==3) {
+			res_crumb=square*8;
+			res_glue=res_crumb*0.18;
+			if(gruntval==1) {
+				res_grunt_glue=square*0.2;
+				res_grunt_solvent=square*0.2;
+			} else {res_grunt_glue='нет';res_grunt_solvent='нет';}
+		}
+
+	} else {
+		res_crumb='Ошибка';
+		res_glue='Ошибка';
+		res_grunt_glue='Ошибка';
+		res_grunt_solvent='Ошибка';
+	}
+
+	$('#resultcalc').html('Площадь покрытия: '+square+' м<sup>2</sup><br>Вид покрытия: '+covertype+'<br>Материал верхнего слоя:'+materialupcolor1+
+		'<br>Толщина верхнего слоя (мм):'+layertop+'<br>'+'Толщина нижнего слоя (мм): '+layerbottom+
+		'<br>Грунтовка: '+grunt+'<br>Скипидар / УС: '+skipidar+'<br>Расходники (тазы перчатки, тележки):'+rashodniki+
+		'<br><br><h3>Вам понадобится:</h3>Крошка: '+res_crumb+' кг<br>Клей: '+res_glue+' кг<br>Грунт(клей+растворитель): '+
+		res_grunt_glue+' кг + '+res_grunt_solvent+' л');
+	});
+
+	$('#layerbottom').change(function(){ 
+		var covertype1=$('select[name="covertype1"] option:selected').val();
+		layercalc(covertype1, $(this).val()); 
+	});
+
+	$('body').on('change', 'input[type="range"]', function(){
+		var covertype1=$('select[name="covertype1"] option:selected').val();
+		$(this).prev().val(this.value);		
+		layercalc(covertype1, $(this).val()); 
+	});
+
+	$('select[name="covertype1"]').change(function(){
+		var range=$('input[name="layerbottom"]').val(); 
+		var i=0;
+		if($(this).val()>0) {
+
+			if($(this).val()==1) {
+				$('.sbr').removeClass('hidden');
+				$('.colors').addClass('hidden');
+				$('.sbritem').each(function(){i++; });
+				var optionlist=$('#sbrselect').html();
+				var string="<label class='sbritem'>Материал слоя:<br><select name='materialupcolor_1' title='Материал слоя'>"+optionlist+"</select>";
+				$('.sbr').html(string);
+			}
+
+			if($(this).val()==2) {
+				$('.sbr').addClass('hidden');
+				$('.colors').removeClass('hidden');
+				$('.coloritem').each(function(){i++; });
+				var optionlist=$('#colorsselect').html();
+				var string="<label class='coloritem'>Материал слоя:<br><select name='materialupcolor_"+i+"' title='Материал слоя'>"+optionlist+"</select><br>Площадь покрытия цветом, %: <br><input type='number' id='squarelayer_"+i+"' name='squarelayer_"+i+"' value='33'><input type='range' name='layersquare_"+i+"' id='layersquare_"+i+"' min='0' max='100' step='1' value='33'><input type='button' id='addcolor' name='addcolor' value='Добавить цвет'></label>";
+				$('.colors').html(string);
+			}
+			
+		} else { 
+			$('.colors').addClass('hidden'); $('.colors').empty();
+		}
+
+		layercalc($(this).val(),range); 
+
+	});
+	$('#square').change(function(){ 
+		var covertype1=$('select[name="covertype1"] option:selected').val();
+		var range=$('input[name="layerbottom"]').val(); 
+		if(covertype1>0) {
+			layercalc(covertype1,range); 
+		}
+	});
+
+	function layercalc(covertype1,range) {	
+		if($('#square').val()>0) {} else {alert('Не указана площадь покрытия'); return false;}
+		var resultbottom, koff, massa, backet, barrel, glue, glueup, massacost, massacolors, sglue, solvent, range1;
+		if(covertype1==1) {     
+
+			var price=<? echo $arrprodsbr[1][2]; ?>;
+			koff=(range)/10;
+			massa=7*koff*$('#square').val();
+			glue=massa*0.2;
+			massacost=massa*(price);
+		}
+		if(covertype1==2) { 
+//alert(range);
+			var i;
+			massa=0;
+			massacolors=0;
+			koff=range/10;
+			var j=$('.colors').find('label.coloritem').length;
+			for(i=1;i<=j;i++){
+				massacolors=parseInt(massacolors)+parseInt($('#squarelayer_'+i).val());
+			}
+			range1=$('#square').val()*massacolors/100;
+			massa=7*koff*range1;
+console.log(massa);
+			glue=massa*0.18;
+			massacost=massa*60;
+
+			console.log(massacolors+'|'+ range+'|'+ range1+'|'+massa+'|'+i);
+		}
+		if(covertype1==3) { 
+			koff=(range)/10;
+			massa=8*koff*$('#square').val();
+			glue=massa*0.18;
+			massacost=massa*100;
+		}
+		if(covertype1==4) { alert('Вычисление невозможно!');}
+
+		glueup=Math.round(glue / 20) * 20;
+		backet= Math.ceil(glue / 20);
+		barrel= Math.ceil(glueup / 215);
+
+		sglue=massa*0.2;
+		solvent=massa*0.2;
+
+		$('#resultfirst').html('Кол-во крошки: '+massa.toFixed(2)+' кг - '+(massacost*23).toFixed(2)+'руб<br>Кол-во клея: '+glue.toFixed(2)
+		+' кг (Ведро: '+backet+' -'+backet*275*20+'руб ) (Бочек: '+barrel+' -'+barrel*270*215 + 'руб)<br>'
+		+' Грунтовка (клей + растворитель): '+sglue.toFixed(2)+' кг + '+solvent.toFixed(2)+' кг');
+
+	};
+</script>

@@ -1,0 +1,73 @@
+<?
+    CssHelper::PushFiles( array(
+        'js://ext/uploadify/uploadify.css'
+        , 'js://vt/chosen/chosen.css'
+    ));
+
+    JsHelper::PushFiles( array(
+        'js://ext/jquery.plugins/jquery.tmpl.min.js'
+        , 'js://vt/object-examples.js'
+        , 'js://ext/swfobject/swfobject.js'
+        , 'js://ext/uploadify/jquery.uploadify.js'
+        , 'js://vt/chosen/chosen.jquery.min.js'
+    ));
+
+    JsHelper::PushLine( sprintf( 'sessionData = { "%s" : "%s" };', Session::getName(), Session::getId() ) );
+
+    /** @var array $folders */
+?>
+
+<div id="page-6" class="tab-page rows">
+    <div class="row" style="overflow: visible;">
+        <label>Выберите папку для загрузки</label>
+        <div class="with_chosen">
+            <?= FormHelper::FormSelect( 'currentFolderId', $folders, null, null, !empty( $currentFolderId ) ? $currentFolderId : null, 'currentExampleFolderId', 'chosenExample', false, null, array( 'style' => 'width:600px;' )  ); ?>
+        </div>
+    </div>
+    <div class="row">
+        <label>Массовая загрузка файлов</label>
+        <div style="display: inline-block; //display: inline;">
+            <input id="example_upload" name="example_upload" type="file" />
+        </div>
+    </div>
+    <div data-row="examples" style="display: none;"></div>
+    <div class="row">
+        <ul class="actions">
+            <li class="edit"><a href="#" id="add-example">Добавить пример</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <p>Маленькая картинка &mdash; рекомендуется <?= implode( 'x', ObjectExampleUtility::$DefaultImageSize ) ?>.</p>
+        <table class="objects examples">
+            <tr>
+                <th colspan="2">Название </th>
+                <th>Маленькая картинка * </th>
+                <th>Большая картинка *</th>
+                <th></th>
+            </tr>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    var exampleData = <?= ObjectHelper::ToJSON( $exampleData ); ?>;
+console.log('sdesddsc'+exampleData);
+    <?
+//echo $exampleData.'sdsdfsdfdsf';
+//print_r($item);
+ if ( !empty( $exampleErrors) ) { ?>
+    var exampleErrors  = <?= ObjectHelper::ToJSON( $exampleErrors )?>
+    <? } ?>
+</script>
+<script id="exampleTemplate" type="text/x-jquery-tmpl">
+    <tr class="example sort" id="example-${ $item.counter.nextIndex() }">
+        <td class="handle"><input type="hidden" name="{$prefix}[examples][${ $item.counter.index }][exampleId]" value="${id}" /></td>
+        <td><input type="text" name="{$prefix}[examples][${ $item.counter.index }][title]" value="${exampleName}" class="title-${ $item.counter.index }" size="60" style="width: auto;" /></td>
+        <td class="left"><input type="hidden" class="vfsFile" name="{$prefix}[examples][${ $item.counter.index }][smallImageId]" rel="exampleSmallImageId-${ $item.counter.index }" id="example-small-${ $item.counter.index }" vfs:previewType="image"  {{if smallImage}}value="${ smallImage.id}" data-mode="fileId" vfs:src="{web:vfs://}${ smallImage.src}" vfs:name="${ smallImage.name}"{{/if}}/></td>
+        <td class="left"><input type="hidden" class="vfsFile" name="{$prefix}[examples][${ $item.counter.index }][bigImageId]" rel="exampleBigImageId-${ $item.counter.index }" id="example-big-${ $item.counter.index }" vfs:previewType="image" {{if bigImage}}value="${ bigImage.id}" data-mode="fileId"  vfs:src="{web:vfs://}${ bigImage.src}" vfs:name="${ bigImage.name}"{{/if}}/></td>
+        <td width="10%">
+            <ul class="actions">
+                <li class="delete"><a class="delete-example" data-example-id="${ $item.counter.index }" href="#" title="Удалить">Удалить</a></li>
+            </ul>
+        </td>
+    </tr>
+</script>

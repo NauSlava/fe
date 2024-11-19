@@ -1,0 +1,4 @@
+<page>
+    <actions>AShop.Site.GetSiteParams,AShop.Site.GetTemplateItems, AShop.Site.GetNavigations</actions>
+    <template>tmpl://errors/404.tmpl.php</template>
+</page>

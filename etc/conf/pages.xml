@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sites>
+    <site name="ashop">
+        <pages>
+            <pageGroup name="fe" boot="AShop.Site.GetSiteParams, AShop.Site.GetTemplateItems, AShop.Site.GetNavigations" shutdown="AShop.Site.GetLastPosts" sitemap-use="true">
+                <page uri="/"  shutdown="AShop.Site.GetNavigations, AShop.Site.GetMainPageLastPosts">
+                    <actions>AShop.Site.GetStaticPage, AShop.Site.GetRecomendProducts, AShop.Site.GetMainAlbums</actions>
+                    <template>tmpl://fe/index.tmpl.php</template>
+                </page>
+                <page uri="/articles/(page[0-9]+)/"  sitemap-use="false">
+                    <actions>AShop.Site.GetArticlesList</actions>
+                    <template>tmpl://fe/articles/index.tmpl.php</template>
+                </page>
+                <page uri="/articles/" sitemap-use="false">
+                    <actions>AShop.Site.GetArticlesList</actions>
+                    <template>tmpl://fe/articles/index.tmpl.php</template>
+                </page>
+                <page uri="/articles/([^?\/]+)" sitemap-use="false">
+                    <actions>AShop.Site.GetArticlesItem</actions>
+                    <template>tmpl://fe/articles/item.tmpl.php</template>
+                </page>
+				<page uri="/catalog/">
+                    <actions>AShop.Site.GetProducts</actions>
+                    <template>tmpl://fe/catalog/index.tmpl.php</template>
+                </page>
+                <page uri="/catalog/(page[0-9]+)/" sitemap-use="false">
+                    <actions>AShop.Site.GetProducts</actions>
+                    <template>tmpl://fe/catalog/index.tmpl.php</template>
+                </page>
+                <page uri="/catalog/([^?\/]+)/" sitemap-use="false">
+                    <actions>AShop.Site.GetCategory</actions>
+                    <template>tmpl://fe/catalog/category-item.tmpl.php</template>
+                </page>
+				<page uri="/catalog/([^?\/]+)/page([0-9]+)/" sitemap-use="false">
+                    <actions>AShop.Site.GetCategory</actions>
+                    <template>tmpl://fe/catalog/category-item.tmpl.php</template>
+                </page>
+                <page uri="/catalog/([^?\/]+)/([^?\/]+)" sitemap-use="false">
+                    <actions>AShop.Site.GetProduct, AShop.Site.GetRecomendProducts</actions>
+                    <template>tmpl://fe/catalog/product.tmpl.php</template>
+                </page>
+                <page uri="/gallery/"  sitemap-priority="0.8" sitemap-changefreq="weekly">
+                    <actions>AShop.Site.GetAlbums</actions>
+                    <template>tmpl://fe/gallery/index.tmpl.php</template>
+                </page>
+                <page uri="/gallery/([^?\/]+)" sitemap-use="false">
+                    <actions>AShop.Site.GetAlbumItem</actions>
+                    <template>tmpl://fe/gallery/item.tmpl.php</template>
+                </page>
+                <page uri="/search/" sitemap-use="false">
+                    <actions>AShop.Site.SiteSearch</actions>
+                    <template>tmpl://fe/search/index.tmpl.php</template>
+                </page>
+                <page uri="/contacts/">
+                    <actions>AShop.Site.GetForceStaticPage, AShop.Site.SaveFeedback</actions>
+                    <template>tmpl://fe/content/contacts.tmpl.php</template>
+                </page>
+                <page uri="/contacts/success">
+                    <template>tmpl://fe/content/contacts-success.tmpl.php</template>
+                </page>
+                <page uri="/sitemap.xml" sitemap-use="false" boot="" shutdown="">
+                    <actions>AShop.Site.GetXmlSitemap</actions>
+                </page>
+                <page uri="/market.yml">
+                    <actions>AShop.Site.GetMarketYml</actions>
+                </page>
+                <page uri="controls://products/get-more/"  sitemap-use="false">
+                    <actions>AShop.Site.GetProductsMore</actions>
+                    <template>tmpl://fe/controls/index.tmpl.php</template>
+                </page>
+                <page uri="/calc/">
+                    <template>tmpl://fe/calc/index.tmpl.php</template>
+                </page>
+            </pageGroup>
+            <pageGroup name="vt" boot="AShop.Common.CheckAuth">
+                <page uri="vt://login" boot="">
+                    <template>tmpl://vt/login.tmpl.php</template>
+                    <actions>AShop.Common.Login</actions>
+                </page>
+                <page uri="vt://">
+                    <template>tmpl://vt/index.tmpl.php</template>
+                </page>
+
+                <pageGroup name="AShop.Common">
+                    <pageGroup name="siteParam">
+                        <page uri="vt://site-params/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Common.GetSiteParamList, AShop.Common.SetSiteParamsMenu</actions>
+                            <template>tmpl://vt/site-params/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://site-params/add">
+                            <actions>AShop.Common.SaveSiteParam</actions>
+                            <template>tmpl://vt/site-params/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://site-params/delete/([0-9]+)">
+                            <actions>AShop.Common.DeleteSiteParam</actions>
+                        </page>
+                        <page uri="vt://site-params/edit/([0-9]+)">
+                            <actions>AShop.Common.SaveSiteParam</actions>
+                            <template>tmpl://vt/site-params/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                    <pageGroup name="metaDetail">
+                        <page uri="vt://meta-details/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Common.GetMetaDetailList</actions>
+                            <template>tmpl://vt/meta-details/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://meta-details/add">
+                            <actions>AShop.Common.SaveMetaDetail</actions>
+                            <template>tmpl://vt/meta-details/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://meta-details/delete/([0-9]+)">
+                            <actions>AShop.Common.DeleteMetaDetail</actions>
+                        </page>
+                        <page uri="vt://meta-details/edit/([0-9]+)">
+                            <actions>AShop.Common.SaveMetaDetail</actions>
+                            <template>tmpl://vt/meta-details/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                    <pageGroup name="user">
+                        <page uri="vt://users/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Common.GetUserList</actions>
+                            <template>tmpl://vt/users/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://users/add">
+                            <actions>AShop.Common.SaveUser</actions>
+                            <template>tmpl://vt/users/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://users/delete/([0-9]+)">
+                            <actions>AShop.Common.DeleteUser</actions>
+                        </page>
+                        <page uri="vt://users/edit/([0-9]+)">
+                            <actions>AShop.Common.SaveUser</actions>
+                            <template>tmpl://vt/users/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                    <pageGroup name="staticPage">
+                        <page uri="vt://static-pages/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Common.GetStaticPageList, AShop.Common.SetStaticPagesMenu</actions>
+                            <template>tmpl://vt/static-pages/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://static-pages/add">
+                            <actions>AShop.Common.SaveStaticPage</actions>
+                            <template>tmpl://vt/static-pages/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://static-pages/delete/([0-9]+)">
+                            <actions>AShop.Common.DeleteStaticPage</actions>
+                        </page>
+                        <page uri="vt://static-pages/edit/([0-9]+)">
+                            <actions>AShop.Common.SaveStaticPage</actions>
+                            <template>tmpl://vt/static-pages/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                    <pageGroup name="navigationType">
+                        <page uri="vt://navigations/types/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Common.GetNavigationTypeList</actions>
+                            <template>tmpl://vt/navigations/types/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://navigations/types/add">
+                            <actions>AShop.Common.SaveNavigationType</actions>
+                            <template>tmpl://vt/navigations/types/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://navigations/types/delete/([0-9]+)">
+                            <actions>AShop.Common.DeleteNavigationType</actions>
+                        </page>
+                        <page uri="vt://navigations/types/edit/([0-9]+)">
+                            <actions>AShop.Common.SaveNavigationType</actions>
+                            <template>tmpl://vt/navigations/types/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                    <pageGroup name="navigation">
+                        <page uri="vt://navigations/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Common.GetNavigationList</actions>
+                            <template>tmpl://vt/navigations/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://navigations/add">
+                            <actions>AShop.Common.SaveNavigation</actions>
+                            <template>tmpl://vt/navigations/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://navigations/delete/([0-9]+)">
+                            <actions>AShop.Common.DeleteNavigation</actions>
+                        </page>
+                        <page uri="vt://navigations/edit/([0-9]+)">
+                            <actions>AShop.Common.SaveNavigation</actions>
+                            <template>tmpl://vt/navigations/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                    <pageGroup name="templateItem">
+                        <page uri="vt://template-items/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Common.GetTemplateItemList</actions>
+                            <template>tmpl://vt/template-items/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://template-items/add">
+                            <actions>AShop.Common.SaveTemplateItem</actions>
+                            <template>tmpl://vt/template-items/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://template-items/delete/([0-9]+)">
+                            <actions>AShop.Common.DeleteTemplateItem</actions>
+                        </page>
+                        <page uri="vt://template-items/edit/([0-9]+)">
+                            <actions>AShop.Common.SaveTemplateItem</actions>
+                            <template>tmpl://vt/template-items/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                </pageGroup>
+                <pageGroup name="AShop.Content">
+                    <pageGroup name="document">
+                        <page uri="vt://documents/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Content.GetDocumentList</actions>
+                            <template>tmpl://vt/documents/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://documents/add">
+                            <actions>AShop.Content.SaveDocument</actions>
+                            <template>tmpl://vt/documents/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://documents/delete/([0-9]+)">
+                            <actions>AShop.Content.DeleteDocument</actions>
+                        </page>
+                        <page uri="vt://documents/edit/([0-9]+)">
+                            <actions>AShop.Content.SaveDocument</actions>
+                            <template>tmpl://vt/documents/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                    <pageGroup name="album">
+                        <page uri="vt://albums/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Content.GetAlbumList</actions>
+                            <template>tmpl://vt/albums/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://albums/add">
+                            <actions>AShop.Content.SaveAlbum</actions>
+                            <template>tmpl://vt/albums/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://albums/delete/([0-9]+)">
+                            <actions>AShop.Content.DeleteAlbum</actions>
+                        </page>
+                        <page uri="vt://albums/edit/([0-9]+)">
+                            <actions>AShop.Content.SaveAlbum</actions>
+                            <template>tmpl://vt/albums/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                    <pageGroup name="feedback">
+                        <page uri="vt://feedbacks/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Content.GetFeedbackList</actions>
+                            <template>tmpl://vt/feedbacks/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://feedbacks/add">
+                            <actions>AShop.Content.SaveFeedback</actions>
+                            <template>tmpl://vt/feedbacks/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://feedbacks/delete/([0-9]+)">
+                            <actions>AShop.Content.DeleteFeedback</actions>
+                        </page>
+                        <page uri="vt://feedbacks/edit/([0-9]+)">
+                            <actions>AShop.Content.SaveFeedback</actions>
+                            <template>tmpl://vt/feedbacks/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                </pageGroup>
+                <pageGroup name="AShop.Catalog">
+                    <pageGroup name="brand">
+                        <page uri="vt://brands/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Catalog.GetBrandList</actions>
+                            <template>tmpl://vt/brands/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://brands/add">
+                            <actions>AShop.Catalog.SaveBrand</actions>
+                            <template>tmpl://vt/brands/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://brands/delete/([0-9]+)">
+                            <actions>AShop.Catalog.DeleteBrand</actions>
+                        </page>
+                        <page uri="vt://brands/edit/([0-9]+)">
+                            <actions>AShop.Catalog.SaveBrand</actions>
+                            <template>tmpl://vt/brands/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                    <pageGroup name="category">
+                        <page uri="vt://products/categories/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Catalog.GetCategoryList</actions>
+                            <template>tmpl://vt/products/categories/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://products/categories/add">
+                            <actions>AShop.Catalog.SaveCategory</actions>
+                            <template>tmpl://vt/products/categories/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://products/categories/delete/([0-9]+)">
+                            <actions>AShop.Catalog.DeleteCategory</actions>
+                        </page>
+                        <page uri="vt://products/categories/edit/([0-9]+)">
+                            <actions>AShop.Catalog.SaveCategory</actions>
+                            <template>tmpl://vt/products/categories/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                    <pageGroup name="product">
+                        <page uri="vt://products/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Catalog.GetProductList</actions>
+                            <template>tmpl://vt/products/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://products/add">
+                            <actions>AShop.Catalog.SaveProduct</actions>
+                            <template>tmpl://vt/products/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://products/delete/([0-9]+)">
+                            <actions>AShop.Catalog.DeleteProduct</actions>
+                        </page>
+                        <page uri="vt://products/edit/([0-9]+)">
+                            <actions>AShop.Catalog.SaveProduct</actions>
+                            <template>tmpl://vt/products/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                    <pageGroup name="color">
+                        <page uri="vt://colors/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Catalog.GetColorList</actions>
+                            <template>tmpl://vt/colors/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://colors/add">
+                            <actions>AShop.Catalog.SaveColor</actions>
+                            <template>tmpl://vt/colors/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://colors/delete/([0-9]+)">
+                            <actions>AShop.Catalog.DeleteColor</actions>
+                        </page>
+                        <page uri="vt://colors/edit/([0-9]+)">
+                            <actions>AShop.Catalog.SaveColor</actions>
+                            <template>tmpl://vt/colors/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                    <pageGroup name="size">
+                        <page uri="vt://sizes/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Catalog.GetSizeList</actions>
+                            <template>tmpl://vt/sizes/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://sizes/add">
+                            <actions>AShop.Catalog.SaveSize</actions>
+                            <template>tmpl://vt/sizes/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://sizes/delete/([0-9]+)">
+                            <actions>AShop.Catalog.DeleteSize</actions>
+                        </page>
+                        <page uri="vt://sizes/edit/([0-9]+)">
+                            <actions>AShop.Catalog.SaveSize</actions>
+                            <template>tmpl://vt/sizes/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                    <pageGroup name="depth">
+                        <page uri="vt://depths/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Catalog.GetDepthList</actions>
+                            <template>tmpl://vt/depths/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://depths/add">
+                            <actions>AShop.Catalog.SaveDepth</actions>
+                            <template>tmpl://vt/depths/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://depths/delete/([0-9]+)">
+                            <actions>AShop.Catalog.DeleteDepth</actions>
+                        </page>
+                        <page uri="vt://depths/edit/([0-9]+)">
+                            <actions>AShop.Catalog.SaveDepth</actions>
+                            <template>tmpl://vt/depths/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                </pageGroup>
+                <pageGroup name="AShop.Forms">
+                    <pageGroup name="form">
+                        <page uri="vt://forms/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Forms.GetFormList</actions>
+                            <template>tmpl://vt/forms/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://forms/add">
+                            <actions>AShop.Forms.SaveForm</actions>
+                            <template>tmpl://vt/forms/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://forms/delete/([0-9]+)">
+                            <actions>AShop.Forms.DeleteForm</actions>
+                        </page>
+                        <page uri="vt://forms/edit/([0-9]+)">
+                            <actions>AShop.Forms.SaveForm</actions>
+                            <template>tmpl://vt/forms/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                    <pageGroup name="formField">
+                        <page uri="vt://forms/fields/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Forms.GetFormFieldList</actions>
+                            <template>tmpl://vt/forms/fields/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://forms/fields/add">
+                            <actions>AShop.Forms.SaveFormField</actions>
+                            <template>tmpl://vt/forms/fields/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://forms/fields/delete/([0-9]+)">
+                            <actions>AShop.Forms.DeleteFormField</actions>
+                        </page>
+                        <page uri="vt://forms/fields/edit/([0-9]+)">
+                            <actions>AShop.Forms.SaveFormField</actions>
+                            <template>tmpl://vt/forms/fields/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                    <pageGroup name="formResult">
+                        <page uri="vt://forms/results/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Forms.GetFormResultList</actions>
+                            <template>tmpl://vt/forms/results/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://forms/results/delete/([0-9]+)">
+                            <actions>AShop.Forms.DeleteFormResult</actions>
+                        </page>
+                        <page uri="vt://forms/results/edit/([0-9]+)">
+                            <actions>AShop.Forms.SaveFormResult</actions>
+                            <template>tmpl://vt/forms/results/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                    <pageGroup name="subscriber">
+                        <page uri="vt://subscribers/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Forms.GetSubscriberList</actions>
+                            <template>tmpl://vt/subscribers/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://subscribers/add">
+                            <actions>AShop.Forms.SaveSubscriber</actions>
+                            <template>tmpl://vt/subscribers/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://subscribers/delete/([0-9]+)">
+                            <actions>AShop.Forms.DeleteSubscriber</actions>
+                        </page>
+                        <page uri="vt://subscribers/edit/([0-9]+)">
+                            <actions>AShop.Forms.SaveSubscriber</actions>
+                            <template>tmpl://vt/subscribers/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                </pageGroup>
+                <pageGroup name="AShop.Orders">
+                    <pageGroup name="order">
+                        <page uri="vt://orders/">
+                            <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Orders.GetOrderList</actions>
+                            <template>tmpl://vt/orders/index.tmpl.php</template>
+                        </page>
+                        <page uri="vt://orders/add">
+                            <actions>AShop.Orders.SaveOrder</actions>
+                            <template>tmpl://vt/orders/add.tmpl.php</template>
+                        </page>
+                        <page uri="vt://orders/delete/([0-9]+)">
+                            <actions>AShop.Orders.DeleteOrder</actions>
+                        </page>
+                        <page uri="vt://orders/edit/([0-9]+)">
+                            <actions>AShop.Orders.SaveOrder</actions>
+                            <template>tmpl://vt/orders/edit.tmpl.php</template>
+                        </page>
+                    </pageGroup>
+                </pageGroup>
+                <pageGroup name="daemonLocks">
+                    <page uri="vt://daemons/">
+                        <actions>Eaze.Helpers.ProcessSearchFilter, AShop.Common.GetDaemonLockList</actions>
+                        <template>tmpl://vt/daemons/index.tmpl.php</template>
+                    </page>
+                    <page uri="vt://daemons/delete/([0-9]+)">
+                        <actions>AShop.Common.DeleteDaemonLock</actions>
+                    </page>
+                </pageGroup>
+                <pageGroup name="modules">
+                    <page uri="vt://modules/memcached">
+                        <template>tmpl://vt/elements/memcached.tmpl.php</template>
+                        <actions>Eaze.Helpers.GetMemcachedInfo</actions>
+                    </page>
+                </pageGroup>
+                <pageGroup name="vfs">
+                    <page uri="vt://vfs/(mce)?">
+                        <template>tmpl://vt/elements/vfs/browse.tmpl.php</template>
+                    </page>
+                    <page uri="vt://vfs/rpc/">
+                        <actions>Base.VFS.VfsRpcService</actions>
+                    </page>
+                    <page uri="vt://vfs/manage/file/(queue|temp)/">
+                        <actions>Base.VFS.UploadFile</actions>
+                    </page>
+                    <page uri="vt://vfs/attach">
+                        <template>tmpl://vt/elements/vfs/attach.tmpl.php</template>
+                    </page>
+                </pageGroup>
+                <pageGroup name="controls">
+                    <page uri="controls://image-upload/objects/">
+                        <actions>AShop.Common.ObjectImageUploadControl</actions>
+                    </page>
+                    <page uri="controls://example-upload/objects/">
+                        <actions>AShop.Common.ObjectExampleUploadControl</actions>
+                    </page>
+                </pageGroup>
+            </pageGroup>
+            <page uri="([^?]+)" boot="AShop.Site.GetSiteParams, AShop.Site.GetTemplateItems" shutdown="AShop.Site.GetNavigations, AShop.Site.GetLastPosts">
+                <actions>AShop.Site.GetForceStaticPage, AShop.Site.ProcessForm</actions>
+                <template>tmpl://fe/template.tmpl.php</template>
+            </page>
+        </pages>
+    </site>
+</sites>

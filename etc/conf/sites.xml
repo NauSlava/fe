@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sites>
+	<site name="ashop">
+		<settings>
+			<paths>
+				<path name="shared" value="/shared" />
+				<path name="js" value="/shared/js" />
+				<path name="css" value="/shared/css" />
+				<path name="flash" value="/shared/flash" />
+				<path name="images" value="/shared/images" />
+				<path name="lang" value="/etc/locale" />
+				<path name="vt" value="/vt" />
+				<path name="tmpl" value="/etc/templates" />
+				<path name="vfs" value="/shared/files" />
+				<path name="temp" value="/shared/temp" />
+				<path name="mail" value="/etc/templates/mail" />
+				<path name="controls" value="/int/controls" />
+				<path name="daemons" value="/int/daemons" />
+			</paths>
+			<!-- System modules Settings -->
+			<modules>
+    			<localization class="LocaleLoader">
+				    <param name="path">lang://</param>
+				    <param name="default">ru</param>
+				    <param name="allowChange">false</param>
+					<param name="htmlEncoding">utf-8</param>
+    			</localization>
+    			<mailFactory class="MailFactory">
+				    <param name="senderName">Компания РеКро</param>
+				    <param name="senderEmail">admin@recro.ru</param>
+				    <param name="charset">utf-8</param>
+    			</mailFactory>
+                <memcache class="MemcacheHelper">
+                    <servers autocompress="true" active="false">
+                        <server host="127.0.0.1" active="false" />
+                    </servers>
+                </memcache>
+				<textRender class="TextRender" />
+				<settingsUility class="SettingsUtility">
+                    <param name="ShopBaseUrl">catalog</param>
+                </settingsUility>
+			</modules>
+			<databases>
+				<database driver="MySql">
+					<name>ksplit</name>
+					<user>root</user>
+					<password>root</password>
+					<encoding>UTF8</encoding>
+				</database>
+			</databases>
+		</settings>
+		<hosts>
+			<host name="production">
+                <hostname>recro.ru</hostname>
+				<port>443</port>
+				<protocol>https</protocol>
+                <settings>
+                    <databases>
+                        <database driver="MySql">
+                            <hostname>localhost</hostname>
+                            <name>born2fly_new</name>
+                            <user>born2fly_new</user>
+                            <password>zNjGXInHcAyIIBKAi8V4</password>
+                        </database>
+                    </databases>
+                </settings>
+            </host>
+		</hosts>
+	</site>
+</sites>

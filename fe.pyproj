@@ -1,0 +1,305 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>bc1004ce-1902-45cb-a752-7b1d851b6cf7</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>
+    </StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>fe</Name>
+    <RootNamespace>fe</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="etc\" />
+    <Folder Include="etc\conf\" />
+    <Folder Include="etc\errors\" />
+    <Folder Include="etc\locale\" />
+    <Folder Include="etc\templates\" />
+    <Folder Include="etc\templates\errors\" />
+    <Folder Include="etc\templates\fe.bak\" />
+    <Folder Include="etc\templates\fe.bak\articles\" />
+    <Folder Include="etc\templates\fe.bak\brands\" />
+    <Folder Include="etc\templates\fe.bak\catalog\" />
+    <Folder Include="etc\templates\fe.bak\content\" />
+    <Folder Include="etc\templates\fe.bak\controls\" />
+    <Folder Include="etc\templates\fe.bak\elements\" />
+    <Folder Include="etc\templates\fe.bak\gallery\" />
+    <Folder Include="etc\templates\fe.bak\news\" />
+    <Folder Include="etc\templates\fe.bak\search\" />
+    <Folder Include="etc\templates\fe.bak\shop\" />
+    <Folder Include="etc\templates\fe.bak\subscribes\" />
+    <Folder Include="etc\templates\fe\" />
+    <Folder Include="etc\templates\fe\articles\" />
+    <Folder Include="etc\templates\fe\brands\" />
+    <Folder Include="etc\templates\fe\calc\" />
+    <Folder Include="etc\templates\fe\catalog\" />
+    <Folder Include="etc\templates\fe\content\" />
+    <Folder Include="etc\templates\fe\controls\" />
+    <Folder Include="etc\templates\fe\elements\" />
+    <Folder Include="etc\templates\fe\gallery\" />
+    <Folder Include="etc\templates\fe\news\" />
+    <Folder Include="etc\templates\fe\search\" />
+    <Folder Include="etc\templates\fe\shop\" />
+    <Folder Include="etc\templates\fe\subscribes\" />
+    <Folder Include="etc\templates\mail\" />
+    <Folder Include="etc\templates\vt\" />
+    <Folder Include="etc\templates\vt\albums\" />
+    <Folder Include="etc\templates\vt\brands\" />
+    <Folder Include="etc\templates\vt\cities\" />
+    <Folder Include="etc\templates\vt\colors\" />
+    <Folder Include="etc\templates\vt\daemons\" />
+    <Folder Include="etc\templates\vt\depths\" />
+    <Folder Include="etc\templates\vt\documents\" />
+    <Folder Include="etc\templates\vt\elements\" />
+    <Folder Include="etc\templates\vt\elements\datagrid\" />
+    <Folder Include="etc\templates\vt\elements\menu\" />
+    <Folder Include="etc\templates\vt\elements\vfs\" />
+    <Folder Include="etc\templates\vt\feedbacks\" />
+    <Folder Include="etc\templates\vt\forms\" />
+    <Folder Include="etc\templates\vt\forms\fields\" />
+    <Folder Include="etc\templates\vt\forms\results\" />
+    <Folder Include="etc\templates\vt\meta-details\" />
+    <Folder Include="etc\templates\vt\navigations\" />
+    <Folder Include="etc\templates\vt\navigations\types\" />
+    <Folder Include="etc\templates\vt\orders\" />
+    <Folder Include="etc\templates\vt\products\" />
+    <Folder Include="etc\templates\vt\products\categories\" />
+    <Folder Include="etc\templates\vt\products\modal\" />
+    <Folder Include="etc\templates\vt\site-params\" />
+    <Folder Include="etc\templates\vt\sizes\" />
+    <Folder Include="etc\templates\vt\static-pages\" />
+    <Folder Include="etc\templates\vt\subscribers\" />
+    <Folder Include="etc\templates\vt\template-items\" />
+    <Folder Include="etc\templates\vt\users\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="etc\conf\.htaccess" />
+    <Content Include="etc\conf\pages.xml" />
+    <Content Include="etc\conf\sites.xml" />
+    <Content Include="etc\errors\404.xml" />
+    <Content Include="etc\locale\.htaccess" />
+    <Content Include="etc\locale\ru.xml" />
+    <Content Include="etc\templates\errors\404.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\articles\index.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\articles\item.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\brands\index.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\brands\item.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\catalog\category-item.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\catalog\category-page.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\catalog\index.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\catalog\index.tmpl.php.bak" />
+    <Content Include="etc\templates\fe.bak\catalog\latests.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\catalog\product.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\content\contacts-success.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\content\contacts.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\controls\index.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\elements\breadcrumbs.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\elements\footer.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\elements\form.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\elements\header.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\elements\index.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\elements\main-menu.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\elements\paginator.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\elements\sidebar.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\gallery\index.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\gallery\item.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\gallery\videos.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\index.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\news\index.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\news\item.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\search\index.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\shop\basket.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\shop\success.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\subscribes\index.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\subscribes\success.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\subscribes\unsubscribe.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\subscribes\unsuccess.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\subscribes\valid.tmpl.php" />
+    <Content Include="etc\templates\fe.bak\template.tmpl.php" />
+    <Content Include="etc\templates\fe\articles\index.tmpl.php" />
+    <Content Include="etc\templates\fe\articles\item.tmpl.php" />
+    <Content Include="etc\templates\fe\brands\index.tmpl.php" />
+    <Content Include="etc\templates\fe\brands\item.tmpl.php" />
+    <Content Include="etc\templates\fe\calc\index.tmpl.php" />
+    <Content Include="etc\templates\fe\calc\item.tmpl.php" />
+    <Content Include="etc\templates\fe\catalog\category-item.tmpl.php" />
+    <Content Include="etc\templates\fe\catalog\category-page.tmpl.php" />
+    <Content Include="etc\templates\fe\catalog\index.tmpl.php" />
+    <Content Include="etc\templates\fe\catalog\index.tmpl.php.bak" />
+    <Content Include="etc\templates\fe\catalog\latests.tmpl.php" />
+    <Content Include="etc\templates\fe\catalog\product.tmpl.php" />
+    <Content Include="etc\templates\fe\catalog\test.php" />
+    <Content Include="etc\templates\fe\content\contacts-success.tmpl.php" />
+    <Content Include="etc\templates\fe\content\contacts.tmpl.php" />
+    <Content Include="etc\templates\fe\content\contacts.tmpl.php.bak" />
+    <Content Include="etc\templates\fe\controls\index.tmpl.php" />
+    <Content Include="etc\templates\fe\elements\breadcrumbs.tmpl.php" />
+    <Content Include="etc\templates\fe\elements\calc.tmpl.php" />
+    <Content Include="etc\templates\fe\elements\calc.tmpl.php.bak" />
+    <Content Include="etc\templates\fe\elements\footer.tmpl.php" />
+    <Content Include="etc\templates\fe\elements\footer.tmpl.php.bak" />
+    <Content Include="etc\templates\fe\elements\form.tmpl.php" />
+    <Content Include="etc\templates\fe\elements\header.tmpl.php" />
+    <Content Include="etc\templates\fe\elements\header.tmpl.php.bak" />
+    <Content Include="etc\templates\fe\elements\index.tmpl.php" />
+    <Content Include="etc\templates\fe\elements\main-menu.tmpl.php" />
+    <Content Include="etc\templates\fe\elements\paginator.tmpl.php" />
+    <Content Include="etc\templates\fe\elements\sendform.html" />
+    <Content Include="etc\templates\fe\elements\sidebar.tmpl.php" />
+    <Content Include="etc\templates\fe\elements\test.html" />
+    <Content Include="etc\templates\fe\gallery\index.tmpl.php" />
+    <Content Include="etc\templates\fe\gallery\item.tmpl.php" />
+    <Content Include="etc\templates\fe\gallery\videos.tmpl.php" />
+    <Content Include="etc\templates\fe\index.tmpl.php" />
+    <Content Include="etc\templates\fe\index.tmpl.php.bak" />
+    <Content Include="etc\templates\fe\news\index.tmpl.php" />
+    <Content Include="etc\templates\fe\news\item.tmpl.php" />
+    <Content Include="etc\templates\fe\search\index.tmpl.php" />
+    <Content Include="etc\templates\fe\shop\basket.tmpl.php" />
+    <Content Include="etc\templates\fe\shop\success.tmpl.php" />
+    <Content Include="etc\templates\fe\subscribes\index.tmpl.php" />
+    <Content Include="etc\templates\fe\subscribes\success.tmpl.php" />
+    <Content Include="etc\templates\fe\subscribes\unsubscribe.tmpl.php" />
+    <Content Include="etc\templates\fe\subscribes\unsuccess.tmpl.php" />
+    <Content Include="etc\templates\fe\subscribes\valid.tmpl.php" />
+    <Content Include="etc\templates\fe\template.tmpl.php" />
+    <Content Include="etc\templates\mail\form.tmpl.php" />
+    <Content Include="etc\templates\mail\message-copy.tmpl.php" />
+    <Content Include="etc\templates\mail\message.tmpl.php" />
+    <Content Include="etc\templates\mail\order.tmpl.php" />
+    <Content Include="etc\templates\mail\subscriber.tmpl.php" />
+    <Content Include="etc\templates\mail\user-order.tmpl.php" />
+    <Content Include="etc\templates\vt\albums\add.tmpl.php" />
+    <Content Include="etc\templates\vt\albums\data.tmpl.php" />
+    <Content Include="etc\templates\vt\albums\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\albums\index.tmpl.php" />
+    <Content Include="etc\templates\vt\brands\add.tmpl.php" />
+    <Content Include="etc\templates\vt\brands\data.tmpl.php" />
+    <Content Include="etc\templates\vt\brands\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\brands\index.tmpl.php" />
+    <Content Include="etc\templates\vt\cities\add.tmpl.php" />
+    <Content Include="etc\templates\vt\cities\data.tmpl.php" />
+    <Content Include="etc\templates\vt\cities\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\cities\index.tmpl.php" />
+    <Content Include="etc\templates\vt\colors\add.tmpl.php" />
+    <Content Include="etc\templates\vt\colors\data.tmpl.php" />
+    <Content Include="etc\templates\vt\colors\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\colors\index.tmpl.php" />
+    <Content Include="etc\templates\vt\daemons\index.tmpl.php" />
+    <Content Include="etc\templates\vt\depths\add.tmpl.php" />
+    <Content Include="etc\templates\vt\depths\data.tmpl.php" />
+    <Content Include="etc\templates\vt\depths\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\depths\index.tmpl.php" />
+    <Content Include="etc\templates\vt\documents\add.tmpl.php" />
+    <Content Include="etc\templates\vt\documents\data.tmpl.php" />
+    <Content Include="etc\templates\vt\documents\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\documents\index.tmpl.php" />
+    <Content Include="etc\templates\vt\elements\datagrid\footer.tmpl.php" />
+    <Content Include="etc\templates\vt\elements\datagrid\header.tmpl.php" />
+    <Content Include="etc\templates\vt\elements\datagrid\paginator.tmpl.php" />
+    <Content Include="etc\templates\vt\elements\examples.tmpl.php" />
+    <Content Include="etc\templates\vt\elements\examples.tmpl.php.bak" />
+    <Content Include="etc\templates\vt\elements\images.tmpl.php" />
+    <Content Include="etc\templates\vt\elements\images1.tmpl.php" />
+    <Content Include="etc\templates\vt\elements\memcached.tmpl.php" />
+    <Content Include="etc\templates\vt\elements\menu\breadcrumbs.tmpl.php" />
+    <Content Include="etc\templates\vt\elements\menu\menu.tmpl.php" />
+    <Content Include="etc\templates\vt\elements\meta-details.tmpl.php" />
+    <Content Include="etc\templates\vt\elements\vfs\attach.tmpl.php" />
+    <Content Include="etc\templates\vt\elements\vfs\browse.tmpl.php" />
+    <Content Include="etc\templates\vt\elements\vfs\footer.tmpl.php" />
+    <Content Include="etc\templates\vt\feedbacks\add.tmpl.php" />
+    <Content Include="etc\templates\vt\feedbacks\data.tmpl.php" />
+    <Content Include="etc\templates\vt\feedbacks\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\feedbacks\index.tmpl.php" />
+    <Content Include="etc\templates\vt\footer.tmpl.php" />
+    <Content Include="etc\templates\vt\forms\add.tmpl.php" />
+    <Content Include="etc\templates\vt\forms\data.tmpl.php" />
+    <Content Include="etc\templates\vt\forms\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\forms\fields\add.tmpl.php" />
+    <Content Include="etc\templates\vt\forms\fields\data.tmpl.php" />
+    <Content Include="etc\templates\vt\forms\fields\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\forms\fields\index.tmpl.php" />
+    <Content Include="etc\templates\vt\forms\index.tmpl.php" />
+    <Content Include="etc\templates\vt\forms\results\data.tmpl.php" />
+    <Content Include="etc\templates\vt\forms\results\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\forms\results\index.tmpl.php" />
+    <Content Include="etc\templates\vt\header.tmpl.php" />
+    <Content Include="etc\templates\vt\header.tmpl.php.bak" />
+    <Content Include="etc\templates\vt\index.tmpl.php" />
+    <Content Include="etc\templates\vt\login.tmpl.php" />
+    <Content Include="etc\templates\vt\meta-details\add.tmpl.php" />
+    <Content Include="etc\templates\vt\meta-details\data.tmpl.php" />
+    <Content Include="etc\templates\vt\meta-details\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\meta-details\index.tmpl.php" />
+    <Content Include="etc\templates\vt\navigations\add.tmpl.php" />
+    <Content Include="etc\templates\vt\navigations\data.tmpl.php" />
+    <Content Include="etc\templates\vt\navigations\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\navigations\index.tmpl.php" />
+    <Content Include="etc\templates\vt\navigations\types\add.tmpl.php" />
+    <Content Include="etc\templates\vt\navigations\types\data.tmpl.php" />
+    <Content Include="etc\templates\vt\navigations\types\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\navigations\types\index.tmpl.php" />
+    <Content Include="etc\templates\vt\orders\add.tmpl.php" />
+    <Content Include="etc\templates\vt\orders\data.tmpl.php" />
+    <Content Include="etc\templates\vt\orders\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\orders\index.tmpl.php" />
+    <Content Include="etc\templates\vt\products\add.tmpl.php" />
+    <Content Include="etc\templates\vt\products\categories\add.tmpl.php" />
+    <Content Include="etc\templates\vt\products\categories\data.tmpl.php" />
+    <Content Include="etc\templates\vt\products\categories\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\products\categories\index.tmpl.php" />
+    <Content Include="etc\templates\vt\products\data.tmpl.php" />
+    <Content Include="etc\templates\vt\products\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\products\examples.tmpl.php.bak" />
+    <Content Include="etc\templates\vt\products\index.tmpl.php" />
+    <Content Include="etc\templates\vt\products\modal\smallImage.html" />
+    <Content Include="etc\templates\vt\products\modal\smallImage.php" />
+    <Content Include="etc\templates\vt\products\versions.tmpl.php" />
+    <Content Include="etc\templates\vt\site-params\add.tmpl.php" />
+    <Content Include="etc\templates\vt\site-params\data.tmpl.php" />
+    <Content Include="etc\templates\vt\site-params\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\site-params\index.tmpl.php" />
+    <Content Include="etc\templates\vt\sizes\add.tmpl.php" />
+    <Content Include="etc\templates\vt\sizes\data.tmpl.php" />
+    <Content Include="etc\templates\vt\sizes\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\sizes\index.tmpl.php" />
+    <Content Include="etc\templates\vt\static-pages\add.tmpl.php" />
+    <Content Include="etc\templates\vt\static-pages\data.tmpl.php" />
+    <Content Include="etc\templates\vt\static-pages\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\static-pages\index.tmpl.php" />
+    <Content Include="etc\templates\vt\subscribers\add.tmpl.php" />
+    <Content Include="etc\templates\vt\subscribers\data.tmpl.php" />
+    <Content Include="etc\templates\vt\subscribers\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\subscribers\index.tmpl.php" />
+    <Content Include="etc\templates\vt\template-items\add.tmpl.php" />
+    <Content Include="etc\templates\vt\template-items\data.tmpl.php" />
+    <Content Include="etc\templates\vt\template-items\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\template-items\index.tmpl.php" />
+    <Content Include="etc\templates\vt\users\add.tmpl.php" />
+    <Content Include="etc\templates\vt\users\data.tmpl.php" />
+    <Content Include="etc\templates\vt\users\edit.tmpl.php" />
+    <Content Include="etc\templates\vt\users\index.tmpl.php" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>

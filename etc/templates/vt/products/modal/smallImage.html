@@ -1,0 +1,46 @@
+﻿<style>
+	.cabinet-form {float:left; text-align:left;min-height:145px;}
+	.vert-line {width:1px;height:235px;background:#dedede;float:left;margin-left:28px;}
+	.cabinet-form h2 {font-size: 16px; color: #030101;padding: 5px 0;margin:0px; font-weight: normal;}
+	.cabinet-form .input {width:160px; height:35px; float:left; margin: 13px 1px 10px 0; border: solid 1px #e1e1e1; }
+	.cabinet-form .input input {width:100px; padding: 4px 6px;}
+	.cabinet-form .input126 {width:173px; height:25px; float:left; margin: 13px 2px 10px 0; border: solid 1px #e1e1e1; }
+	.cabinet-form .input126 input {width:160px; padding: 4px 6px;border:0px;}
+	.cabinet-form .margin {margin: 13px 0 10px 5px;}
+
+	#cabinet .button {position: relative; color: #FFFFFF;text-align: center;padding: 5px 10px;float: left;margin-top:5px; background: #888; }
+	#cabinet .button input {font-size: 14px;color: #fff;border:0px;cursor:pointer;}
+	#cabinet .button a {width: 50px;height: 20px; position: absolute; left: 0; top:0;}
+
+	#cabinet .cabinet-form .includes {padding: 20px ; margin: 0 0 10px;display: inline-block;}
+	.cabinet-form .remember {float:right; text-align:right; }
+	.cabinet-form .remember a {color:#3088cf;text-decoration:none;border-bottom:dashed 1px #3088cf;font-size:10px;}
+	.cabinet-form .remember a:hover {border-bottom:none;}
+
+	.cabinet-form .keyboard {width:350px; height: 135px;font-size: 13px; color: #000; float: left; background: #e3e5e7;display: table-cell;vertical-align: middle;}
+</style>
+<div class="cabinet-form">
+	<div class="includes">
+		<h2>Вход в личный кабинет</h2>
+		<form action="/selfcab/" id="regenter" method="post">
+			<div class="input126"><input id="tryreglogin" type="text" name="tryreglogin" placeholder="E-mail"></div>
+			<div class="input126 margin"><input id="tryregpass" type="password" name="tryregpassword" placeholder="Пароль" /></div>
+			<div class="button"><input type="submit" value="Войти" /></div>
+			<div class="remember">
+				<a href="/lostpassword/">Забыли пароль?</a>
+			</div>
+		</form>
+		<div class='close'></div>
+	</div>
+</div>
+<div class="close"></div>
+<script type="text/javascript">
+$(function (){ 
+    $('.window .close').click(function (e) {
+        $('.window').hide();
+        $('#mask').hide();
+  	return false;
+    });        
+
+});
+</script>
